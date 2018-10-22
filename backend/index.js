@@ -39,6 +39,15 @@ mongoose.connection.on('open', () => {
   Score.deleteMany({ name: /Test/ }, (err) => console.error.bind(console, err));
 });
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
 app.get('/', (req, res) => {
   console.info('recieved GET request');
   Score.find((err, scores) => {

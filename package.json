@@ -1,0 +1,18 @@
+{
+  "name": "p5js-games",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/BradHacker/p5js-games",
+  "author": "Bradley Harker",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "concurrently": "^4.0.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.4",
+    "nodemon": "^1.18.4"
+  },
+  "scripts": {
+    "dev": "cd backend && concurrently \"yarn run db\" \"nodemon index.js\""
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>highscore gui</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <style>
+    table {
+      width: 300px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="status">highscore interface loading....</h1>
+  <select id="gameIdChange">
+    <option value="all">All Games</option>
+    <option value="1">Space Invaders - ID 1</option>
+  </select>
+  <hr />
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <td style="width: 20px;">ID</td>
+        <td>Name</td>
+        <td>Score</td>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <script type="text/javascript">
+    let globalData;
+
+    $(document).ready(() => {
+      $('#status').html('connecting to db.')
+      loadAllDocs()
+    })
+
+    function loadAllDocs() {
+      $.ajax('http://localhost:3000', {
+        success: (data) => {
+          globalData = data
+          showData(data)
+          $('#status').html('loaded data from db.')
+        },
+        error: (jqXHR, textStatus) => {
+          console.info(jqXHR);
+          console.info(textStatus);
+        }
+      })
+    }
+
+    function showData(data) {
+      $('#dataTable tbody tr').remove()
+      for (let entry of data) {
+        $('#dataTable tbody').append(`<tr><td>${entry.gameId}</td><td>${entry.name}</td><td>${entry.score}</td></tr>`);
+      }
+    }
+
+    document.getElementById('gameIdChange').onchange = function (e) {
+      if (e.target.value == 'all') {
+        showData(globalData)
+      } else {
+        showData(globalData.filter(score => `${score.gameId}` == e.target.value))
+      }
+    }
+  </script>
+</body>
+
+</html>
