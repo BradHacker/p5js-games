@@ -8,6 +8,7 @@
   "private": false,
   "dependencies": {
     "concurrently": "^4.0.1",
+    "eslint-config-p5js": "^1.0.1",
     "express": "^4.16.4",
     "mongoose": "^5.3.4",
     "nodemon": "^1.18.4"

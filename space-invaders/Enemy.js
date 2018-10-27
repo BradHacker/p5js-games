@@ -1,12 +1,11 @@
 class Enemy {
-  constructor(x, size, color, speed, canvasHeight, canvasWidth) {
-    this.x = x;
+  constructor(size, speed, canvasSize) {
+    this.x = floor(random() * (canvasSize - size));
     this.y = 0;
     this.size = size;
-    this.color = color;
+    this.color = color(random(255), random(255), random(255));
     this.speed = speed;
-    this.canvasHeight = canvasHeight;
-    this.canvasWidth = canvasWidth;
+    this.canvasSize = canvasSize;
   }
 
   draw() {
@@ -16,11 +15,11 @@ class Enemy {
 
   update() {
     // check if the enemy is at the bottom of the screen
-    if (this.y >= this.canvasHeight) {
+    if (this.y >= this.canvasSize) {
       // if so, then it's going to reset to
       //  the top of the screen with random x
       this.y = 0;
-      this.x = floor(random() * (this.canvasWidth - this.size));
+      this.x = floor(random() * (this.canvasSize - this.size));
     }
     // move the enemy
     this.y += this.speed;

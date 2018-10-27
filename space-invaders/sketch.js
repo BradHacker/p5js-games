@@ -4,14 +4,7 @@ let enemy;
 function setup() {
   createCanvas(300, 300);
   player = new Player(20, 5, color(66, 134, 244), width / 2);
-  enemy = new Enemy(
-    floor(random() * (width - 10)),
-    10,
-    color(219, 50, 2),
-    1,
-    height,
-    width
-  );
+  enemy = new Enemy(10, 5, height);
 }
 
 function draw() {
