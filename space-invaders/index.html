@@ -11,12 +11,52 @@
       margin: 0;
     }
   </style>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="../p5.min.js"></script>
   <script src="../addons/p5.dom.min.js"></script>
   <script src="../addons/p5.sound.min.js"></script>
   <script src="sketch.js"></script>
   <script src="Player.js"></script>
   <script src="Enemy.js"></script>
+  <script src="Bullet.js"></script>
+  <script>
+    $(document).ready(() => getHighscores())
+    function getHighscores() {
+      $.ajax('http://localhost:3000', {
+        crossDomain: true,
+        success: function (data) {
+          gotHighscores(data)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+        }
+      })
+    }
+    function submitScore() {
+      $.ajax('http://localhost:3000', {
+        crossDomain: true,
+        method: 'POST',
+        data: JSON.stringify({
+          gameId: 1,
+          name: highscoreInput.value(),
+          score
+        }),
+        dataType: "json",
+        contentType: 'application/json',
+        success: function (data) {
+          getHighscores()
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+        }
+      })
+    }
+  </script>
 </head>
 
 <body>

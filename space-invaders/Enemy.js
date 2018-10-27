@@ -1,15 +1,17 @@
 class Enemy {
-  constructor(size, speed, canvasSize) {
-    this.x = floor(random() * (canvasSize - size));
-    this.y = 0;
+  constructor(x, rowOffset, size, speed, canvasSize) {
+    this.x = x;
+    this.y = 0 - rowOffset;
     this.size = size;
-    this.color = color(random(255), random(255), random(255));
     this.speed = speed;
+    this.maxSpeed = 1;
+    this.color = color(speed / this.maxSpeed - 0.1, 1, 1);
     this.canvasSize = canvasSize;
   }
 
   draw() {
     fill(this.color);
+    rectMode(CORNER);
     rect(this.x, this.y, this.size, this.size);
   }
 
@@ -19,7 +21,7 @@ class Enemy {
       // if so, then it's going to reset to
       //  the top of the screen with random x
       this.y = 0;
-      this.x = floor(random() * (this.canvasSize - this.size));
+      //this.x = floor(random() * (this.canvasSize - this.size));
     }
     // move the enemy
     this.y += this.speed;
