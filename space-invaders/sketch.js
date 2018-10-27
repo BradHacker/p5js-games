@@ -73,12 +73,13 @@ function updateSprites() {
 
 function drawSprites() {
   player.draw();
-  fill(206 / 360, 0.84, 0.95);
-  text(`Lives: ${player.lives}`, 0, height - 12);
-  text(`Score: ${score}`, 0, 12);
   for (let enemy of enemies) {
     enemy.draw();
   }
+  fill(206 / 360, 0.84, 0.95);
+  text(`Lives: ${player.lives}`, 0, height - 12);
+  text(`Score: ${score}`, 0, 12);
+  text(`Level: ${level}`, 0, 24);
 }
 
 function keyPressed() {
