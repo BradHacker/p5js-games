@@ -19,4 +19,3 @@ mkdir -p db
 echo "(8/8) Installing forever..."
 npm i -g forever
 echo "-----\n\nSetup Complete! Running Server!\n\n-----"
-forever start -c "npm start" ./
