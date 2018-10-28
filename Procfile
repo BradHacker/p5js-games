@@ -1,2 +1,1 @@
-release: chmod a+x setup.sh
-release: ./setup.sh
+release: bash ./setup.sh
