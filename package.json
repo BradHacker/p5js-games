@@ -16,6 +16,7 @@
   },
   "scripts": {
     "db": "mongod --dbpath db",
-    "start": "concurrently \"npm run db\" \"nodemon backend/index.js\""
+    "dev": "concurrently \"npm run db\" \"nodemon backend/index.js\"",
+    "start": "nodemon backend/index.js"
   }
 }

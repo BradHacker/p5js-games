@@ -13,9 +13,10 @@ tar -zxvf mongodb-osx-x86_64-3.0.15.tgz
 echo "(6/8) Installing MongoDB..."
 mkdir -p mongodb
 cp -R -n mongodb-osx-x86_64-3.0.15/ mongodb
-export PATH=$(pwd)/mongodb/bin:$PATH
+export PATH="$PATH$(pwd)/mongodb/bin"
 echo "(7/8) Init DB..."
 mkdir -p db
-echo "(8/8) Installing forever..."
-npm i -g forever
+echo "(8/8) Starting DB..."
+cd mongodb/bin
+./mongod
 echo "-----\n\nSetup Complete! Running Server!\n\n-----"
