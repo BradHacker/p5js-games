@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = 8080;
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const internalError = 500;
 const unprocessibleEntity = 422;
 const documentCreated = 201;
@@ -76,4 +78,18 @@ app.post('/highscores', (req, res) => {
   );
 });
 
-app.listen(port, () => console.info(`Listening on Port: ${port}`));
+const key = fs.readFileSync('encryption/private.key');
+const cert = fs.readFileSync('encryption/primary.crt');
+const ca = fs.readFileSync('encryption/intermediate.crt');
+
+const httpsPort = 443;
+const httpPort = 80;
+
+const options = {
+  ca,
+  cert,
+  key
+};
+
+https.createServer(options, app).listen(httpsPort);
+http.createServer(app).listen(httpPort);

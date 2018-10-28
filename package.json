@@ -11,12 +11,15 @@
     "concurrently": "^4.0.1",
     "cors": "^2.8.4",
     "express": "^4.16.4",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.0",
+    "https": "^1.0.0",
     "mongoose": "^5.3.4",
     "nodemon": "^1.18.4"
   },
   "scripts": {
     "db": "mongod --dbpath db",
     "dev": "concurrently \"npm run db\" \"nodemon backend/index.js\"",
-    "start": "nodemon backend/index.js"
+    "start": "node backend/index.js"
   }
 }
