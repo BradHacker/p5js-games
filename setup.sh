@@ -18,5 +18,6 @@ echo "(7/8) Init DB..."
 mkdir -p db
 echo "(8/8) Starting DB..."
 cd mongodb/bin
+ls
 ./mongod
 echo "-----\n\nSetup Complete! Running Server!\n\n-----"
