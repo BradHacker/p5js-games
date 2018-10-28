@@ -8,15 +8,29 @@ let score = 0;
 let level = 1;
 let highscores = [];
 let highscoreDisp;
-let highscoreDiv, highscoreLabel, highscoreInput, highscoreSubmit;
+let highscoreDiv, highscoreLabel, highscoreInput, highscoreSubmit, playAgain;
 
 let totalEnemiesAcross, trueMarginSize;
 
 function setup() {
-  createCanvas(300, 300);
-  console.log(height);
-  console.log(width);
+  createCanvas(400, 300);
   colorMode(HSB, 1);
+  highscoreDisp = createP("Top 5 -\n");
+  highscoreDiv = createDiv();
+  highscoreLabel = createP("Enter Your Name, Submit Your Score!");
+  highscoreInput = createInput();
+  highscoreSubmit = createButton("Submit");
+  playAgain = createButton("Play Again?");
+  highscoreSubmit.mousePressed(submitScore);
+  playAgain.mousePressed(resetSketch);
+  resetSketch();
+}
+
+function resetSketch() {
+  level = 1;
+  score = 0;
+  lives = 3;
+  gameOver = false;
   player = new Player(20, 5, color(39 / 360, 0.74, 1), width / 2);
   totalEnemiesAcross = floor(
     (width - idealMarginSize) / (idealMarginSize + enemySize)
@@ -26,15 +40,11 @@ function setup() {
     (width - enemySize * totalEnemiesAcross) / (totalEnemiesAcross + 1);
   console.log(`True Margin Size: ${trueMarginSize}`);
   spawnEnemies();
-  highscoreDisp = createP("Top 5 -\n");
-  highscoreDiv = createDiv();
-  highscoreLabel = createP("Enter Your Name, Submit Your Score!");
-  highscoreInput = createInput();
-  highscoreSubmit = createButton("Submit");
-  highscoreSubmit.mousePressed(submitScore);
   highscoreLabel.hide();
   highscoreInput.hide();
+  highscoreInput.value("");
   highscoreSubmit.hide();
+  playAgain.hide();
 }
 
 function draw() {
@@ -46,6 +56,8 @@ function draw() {
     textAlign(CENTER, CENTER);
     fill(255);
     text("Game Over!", 0, 0, width, height);
+    text(`Score: ${score}`, 0, 20, width, height);
+    text(`Level: ${level}`, 0, 40, width, height);
   }
 }
 
@@ -76,6 +88,8 @@ function drawSprites() {
   for (let enemy of enemies) {
     enemy.draw();
   }
+  textAlign(LEFT);
+  textSize(12);
   fill(206 / 360, 0.84, 0.95);
   text(`Lives: ${player.lives}`, 0, height - 12);
   text(`Score: ${score}`, 0, 12);
@@ -102,12 +116,7 @@ function checkCollisions() {
         enemies.splice(e, 1);
         player.bullets.splice(b, 1);
         score += 10;
-        if (enemies.length == 0) {
-          level += 1;
-          enemyCount = level * 5;
-          player.bullets = [];
-          spawnEnemies();
-        }
+        checkLevelWin();
       }
     }
     if (
@@ -124,6 +133,7 @@ function checkCollisions() {
         highscoreInput.show();
         highscoreSubmit.show();
       }
+      checkLevelWin();
     }
     if (enemy.y + enemy.size > height) {
       gameOver = true;
@@ -134,7 +144,17 @@ function checkCollisions() {
   }
 }
 
+function checkLevelWin() {
+  if (enemies.length == 0) {
+    level += 1;
+    enemyCount = level * 5;
+    player.bullets = [];
+    spawnEnemies();
+  }
+}
+
 function spawnEnemies() {
+  enemies = [];
   for (let i = 0; i < enemyCount; i++) {
     let row = floor(i / totalEnemiesAcross);
     let x =
@@ -147,11 +167,21 @@ function spawnEnemies() {
 }
 
 function gotHighscores(data) {
-  console.log(data);
-  highscores = data.filter(score => score.gameId == 1);
+  highscores = data
+    .filter(score => score.gameId == 1)
+    .sort((a, b) => b.score - a.score);
   highscoreDisp.html(
     `Top 5 - \n ${highscores
-      .slice(0, 4)
+      .slice(0, 5)
       .map(score => `\n${score.name} - ${score.score}`)}`
   );
+}
+
+function playagain() {
+  console.log("play again run");
+  highscoreLabel.hide();
+  highscoreLabel.value("");
+  highscoreInput.hide();
+  highscoreSubmit.hide();
+  playAgain.show();
 }

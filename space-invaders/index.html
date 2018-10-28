@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p5.js example</title>
+  <title>Space Invaders</title>
   <style>
     body {
       padding: 0;
@@ -47,7 +47,8 @@
         dataType: "json",
         contentType: 'application/json',
         success: function (data) {
-          getHighscores()
+          console.log('submit success');
+          playagain();
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.log(jqXHR);
@@ -55,11 +56,30 @@
           console.log(errorThrown);
         }
       })
+      playagain();
     }
   </script>
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 0;
+      background: black;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .p5Canvas {
+      border: 3px solid white;
+    }
+  </style>
 </head>
 
 <body>
+  <h1>Space Invaders</h1>
 </body>
 
 </html>

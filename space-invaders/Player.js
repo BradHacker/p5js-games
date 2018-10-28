@@ -20,9 +20,9 @@ class Player {
 
   move(direction, maxWidth) {
     //console.log(direction);
-    if (direction > 0 && this.location + this.size <= maxWidth) {
+    if (direction > 0 && this.location + this.size + this.speed <= width) {
       this.location += this.speed;
-    } else if (direction < 0 && this.location >= 0) {
+    } else if (direction < 0 && this.location - this.speed >= 0) {
       this.location -= this.speed;
     }
   }
@@ -31,7 +31,6 @@ class Player {
     this.bullets.push(
       new Bullet(this.location + this.size / 2, this.y + this.size / 2)
     );
-    console.log(this.bullets);
   }
 
   updateBullets() {
