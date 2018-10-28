@@ -18,4 +18,5 @@ echo "(7/8) Init DB..."
 mkdir -p db
 echo "(8/8) Installing forever..."
 npm i -g forever
-echo "-----\n\nSetup Complete! Run this command to start the server:\n\nforever start -c \"npm start\" ./\n"
+echo "-----\n\nSetup Complete! Running Server!\n\n-----"
+forever start -c "npm start" ./
