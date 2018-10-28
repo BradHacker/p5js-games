@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARGS Tech Game Hub</title>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      background: black;
+      color: white;
+      font-family: 'Ubuntu Mono', monospace;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #00D900;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1 id="lastLogin"></h1>
+    <h1>tech@args:~$ game_hub.exe</h1>
+    <h1>Listing all games...</h1>
+    <h1><a href="/static/space-invaders">1) Space Invaders</a></h1>
+  </div>
+  <script>
+    function setDate() {
+      let date = new Date();
+      // Sat Oct 27 16:14:04
+      let daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
+      let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+      document.getElementById("lastLogin").innerHTML = `Last login: 
+         ${daysOfWeek[date.getDay()]} 
+         ${months[date.getMonth()]} 
+         ${date.getDate()} 
+         ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}
+         on console`
+    }
+    setDate();
+    setInterval(setDate, 1000)
+  </script>
+</body>
+
+</html>

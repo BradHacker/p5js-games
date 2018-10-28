@@ -23,7 +23,7 @@
   <script>
     $(document).ready(() => getHighscores())
     function getHighscores() {
-      $.ajax('http://localhost:3000', {
+      $.ajax('http://localhost:8080/highscores', {
         crossDomain: true,
         success: function (data) {
           gotHighscores(data)
@@ -36,7 +36,7 @@
       })
     }
     function submitScore() {
-      $.ajax('http://localhost:3000', {
+      $.ajax('http://localhost:8080/highscores', {
         crossDomain: true,
         method: 'POST',
         data: JSON.stringify({

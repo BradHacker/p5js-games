@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = 3000;
+const port = 8080;
 const internalError = 500;
 const unprocessibleEntity = 422;
 const documentCreated = 201;
@@ -41,11 +41,11 @@ mongoose.connection.on('open', () => {
   Score.deleteMany({ name: /Test/ }, (err) => console.error.bind(console, err));
 });
 
+app.use('/static', express.static('../public'));
 app.use(cors());
-
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+app.get('/highscores', (req, res) => {
   console.info('recieved GET request');
   Score.find((err, scores) => {
     if (err) {
@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/', (req, res) => {
+app.post('/highscores', (req, res) => {
   console.info('recieved POST request');
   const { gameId, score, name } = req.body;
 
