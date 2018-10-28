@@ -17,7 +17,7 @@ export PATH="$PATH$(pwd)/mongodb/bin"
 echo "(7/8) Init DB..."
 mkdir -p db
 echo "(8/8) Starting DB..."
-cd mongodb/bin
-ls
-./mongod
+ls mongodb
+ls mongodb/bin
+./mongodb/bin/mongod
 echo "-----\n\nSetup Complete! Running Server!\n\n-----"
