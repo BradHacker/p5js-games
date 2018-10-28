@@ -11,7 +11,7 @@ const documentCreated = 201;
 mongoose.set('debug', true);
 
 mongoose.connect(
-  'mongodb://localhost/highscores',
+  'mongodb://web:password1@ds143953.mlab.com:43953/highscores',
   { useNewUrlParser: true }
 );
 

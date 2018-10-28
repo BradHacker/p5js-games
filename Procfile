@@ -1,1 +1,1 @@
-release: bash ./setup.sh
+web: npm start
