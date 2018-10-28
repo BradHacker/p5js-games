@@ -18,7 +18,7 @@
   },
   "scripts": {
     "db": "mongod --dbpath db",
-    "dev": "concurrently \"yarn run db\" \"nodemon index.js\"",
-    "start": "concurrently \"yarn run db\" \"nodemon index.js\""
+    "dev": "concurrently \"yarn run db\" \"nodemon backend/index.js\"",
+    "start": "concurrently \"yarn run db\" \"nodemon backend/index.js\""
   }
 }
